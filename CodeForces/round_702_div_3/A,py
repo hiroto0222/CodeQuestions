@@ -1,0 +1,46 @@
+import math
+
+t = int(input())
+for _ in range(t):
+    n = int(input())
+    a = list(map(int, input().split()))
+
+    def check(a, b):
+        if (max(a, b) / min(a, b)) > 2:
+            return False
+        else:
+            return True
+    
+    ans = 0
+    x1 = 0
+    x2 = 1
+    while x1 < n and x2 < n:
+        # print('curr x1: {}, curr x2: {}'.format(x1, x2))
+        if check(a[x1], a[x2]):
+            # print('check passed')
+            x1 += 1
+            x2 += 1
+        else:
+            # print('check not passed')
+            stuck = a[x2]
+            flag = False
+            curr = a[x1]
+            while not flag:
+                # print('stuck: ', stuck)
+                # print('curr: ', curr)
+                if check(curr, stuck):
+                    # print('stuck finished')
+                    flag = True
+                elif curr > stuck:
+                    curr = math.ceil(max(curr, stuck) / 2)
+                    ans += 1
+                else:
+                    curr *= 2
+                    ans += 1
+
+            x1 += 1
+            x2 += 1
+    
+    print(ans)
+    
+            
