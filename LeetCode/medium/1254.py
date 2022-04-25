@@ -28,6 +28,16 @@ class Solution:
                     if closed:
                         count += 1
         
+        for r in range(ROWS):
+            for c in range(COLS):
+                if grid[r][c] == 1:
+                    print("there is a 1 at {} {}",format(r, c))
+        
+        for r in range(ROWS):
+            for c in range(COLS):
+                if grid[r][c] == 2:
+                    print("there is no other 1s")
+                    
         return count
         
 
