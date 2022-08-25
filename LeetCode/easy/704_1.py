@@ -7,18 +7,15 @@ class Solution(object):
         :rtype: int
         """
         left, right = 0, len(nums) - 1
-        if (len(nums) == 1):
-            return 0
-
-        while (left < right):
+        while left <= right:
             mid = (left + right) // 2
-            print(mid)
-            if (nums[mid] > target):
-                right = mid - 1
-            elif (nums[mid] < target):
-                left = mid + 1
-            else: return mid
-
+            if nums[mid] > target:
+                right = mid
+            elif nums[mid] < target:
+                left = mid
+            else:
+                return mid
+        
         return -1
 
 
