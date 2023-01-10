@@ -13,22 +13,21 @@ for _ in range(int(input())):
 
     size = 0
     group = defaultdict(list)
-    for i in range(len(a)):
-        if len(group[a[i]]) < k:
+    for i, val in enumerate(a):
+        if len(group[val]) < k:
+            group[val].append(i)
             size += 1
-            group[a[i]].append(i)
-
-    res = [0] * n
-    groups = group.values()
+    
     size -= size % k
-
-    col = 0
+    groups = group.values()
+    res = [0] * n
+    color = 0
     for group in groups:
-        for val in group:
-            res[val] = col + 1
-            col = (col + 1) % k
+        for i in group:
+            res[i] = color + 1
+            color = (color + 1) % k
             size -= 1
             if size <= 0:
                 break
-
+    
     print(*res)
