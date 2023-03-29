@@ -12,21 +12,40 @@ a -> b -> c -> d
 x -> y -> z
 """
 class UnionFind:
-    def __init__(self,N):
-        self.N=N
-        self.parent_size=[-1]*N
-    def leader(self,a):
-        if self.parent_size[a]<0: return a
-        self.parent_size[a]=self.leader(self.parent_size[a])
-        return self.parent_size[a]
-    def merge(self,a,b):
-        x,y=self.leader(a),self.leader(b)
-        if x == y: return
-        if abs(self.parent_size[x])<abs(self.parent_size[y]):x,y=y,x
-        self.parent_size[x] += self.parent_size[y]
-        self.parent_size[y]=x
-    def same(self,a,b):
-        return self.leader(a) == self.leader(b)
+    def __init__(self, n):
+        self.n = n
+        self.parent = [-1] * n
+    
+    def find(self, x):
+        if self.parent[x] < 0:
+            return x
+        return self.find(self.parent[x])
+    
+    def union(self, x, y):
+        x = self.find(x)
+        y = self.find(y)
+
+        if x == y:
+            return
+        
+        self.parent[x] = y
+
+# class UnionFind:
+#     def __init__(self,N):
+#         self.N=N
+#         self.parent_size=[-1]*N
+#     def leader(self,a):
+#         if self.parent_size[a]<0: return a
+#         self.parent_size[a]=self.leader(self.parent_size[a])
+#         return self.parent_size[a]
+#     def merge(self,a,b):
+#         x,y=self.leader(a),self.leader(b)
+#         if x == y: return
+#         if abs(self.parent_size[x])<abs(self.parent_size[y]):x,y=y,x
+#         self.parent_size[x] += self.parent_size[y]
+#         self.parent_size[y]=x
+#     def same(self,a,b):
+#         return self.leader(a) == self.leader(b)
     
 N = int(input())
 UF = UnionFind(2*N)
